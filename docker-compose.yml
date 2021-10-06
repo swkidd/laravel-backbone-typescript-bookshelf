@@ -2,7 +2,9 @@ version: "3.7"
 
 services:
   laravel:
-    image: yaraku/assignment:$COMPOSE_PROJECT_NAME
+    build:
+      context: .
+      dockerfile: laravel.dockerfile
     container_name: $COMPOSE_PROJECT_NAME-laravel
     environment:
       DB_DATABASE: laravel
@@ -17,6 +19,8 @@ services:
     - '80:80'
     volumes:
     - ./src:/var/www/html
+    depends_on:
+      - mysql
 
   mysql:
     image: mysql:8
@@ -27,4 +31,6 @@ services:
       MYSQL_USER: laravel
       MYSQL_PASSWORD: secret
       MYSQL_DATABASE: laravel
-      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    volumes:
+    - ./mysql:/var/lib/mysql
