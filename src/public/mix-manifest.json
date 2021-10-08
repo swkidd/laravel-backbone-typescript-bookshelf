@@ -1,7 +1,9 @@
 {
-    "/js/app.js": "/js/app.js",
+    "/js/main.js": "/js/main.js",
+    "/js/manifest.js": "/js/manifest.js",
+    "/js/plugins.js": "/js/plugins.js",
     "/css/app.css": "/css/app.css",
     "/css/bootstrap.css": "/css/bootstrap.css",
-    "/js/manifest.js": "/js/manifest.js",
+    "/css/fontawesome.css": "/css/fontawesome.css",
     "/js/vendor.js": "/js/vendor.js"
 }

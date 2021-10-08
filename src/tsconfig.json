@@ -8,5 +8,5 @@
     "skipLibCheck": true,
     "noImplicitAny": false
   },
-  "include": ["resources/js/**/*"],
+  "include": ["resources/ts/**/*"],
 }
