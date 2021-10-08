@@ -11,6 +11,6 @@ const mix = require("laravel-mix");
  |
  */
 
-mix.js("resources/js/app.js", "public/js")
+mix.ts("resources/js/app.ts", "public/js/app.js")
     .extract(["jquery", "backbone"])
     .sass("resources/sass/bootstrap.scss", "public/css/");

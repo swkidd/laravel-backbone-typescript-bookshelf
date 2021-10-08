@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <h1 id="container"></h1>
+    <div id="container"></div>
     <script type="text/javascript">
         var User = Backbone.Collection.extend({
             url: '/user',
