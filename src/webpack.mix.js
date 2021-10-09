@@ -13,11 +13,29 @@ const mix = require("laravel-mix");
 
 mix.js("resources/js/plugins.js", "public/js/")
     .ts("resources/ts/main.ts", "public/js/main.js")
-    .extract(["jquery", "popper.js", "lodash", "backbone", "axios", "bootstrap"])
+    .extract([
+        "jquery",
+        "popper.js",
+        "lodash",
+        "backbone",
+        "axios",
+        "bootstrap"
+    ])
     .sass("resources/sass/app.scss", "public/css/app.css")
     .sass("resources/sass/bootstrap.scss", "public/css/bootstrap.css")
     .sass("resources/sass/fontawesome.scss", "public/css/fontawesome.css")
     .copy(
-        'node_modules/@fortawesome/fontawesome-free/webfonts',
-        'public/webfonts'
+        "node_modules/@fortawesome/fontawesome-free/webfonts",
+        "public/webfonts"
     );
+
+mix.webpackConfig({
+    module: {
+        rules: [
+            {
+                test: /\.html$/,
+                loaders: ["html-loader"]
+            }
+        ]
+    }
+});

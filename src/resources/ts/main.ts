@@ -1,5 +1,5 @@
-import { HeroView } from "./views/HeroView";
+import { CreateBookView } from "./views/CreateBookView";
 
-new HeroView({
+new CreateBookView({
   el: "#app"
 });
