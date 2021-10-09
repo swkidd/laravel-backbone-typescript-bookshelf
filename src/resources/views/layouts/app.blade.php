@@ -26,7 +26,7 @@
 </head>
 
 <body class="container-fluid wrapper">
-    <div id="app" class="row h-100">
+    <div class="row h-100">
         <nav class="d-flex flex-column flex-shrink-0 bg-dark" style="width: 3.5em;">
             <ul class="nav nav-pills text-center">
                 @guest

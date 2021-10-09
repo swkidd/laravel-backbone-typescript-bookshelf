@@ -1,10 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div id="app"></div>
-    </div>
+<div class="row flex-column justify-content-center">
+    <div id="app"></div>
 </div>
 @endsection
 
