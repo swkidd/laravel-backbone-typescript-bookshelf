@@ -5,16 +5,10 @@ import { BookCollection, BookModel } from "./models/book.model";
 import CreateBookView from "./views/create_book.view";
 import ListBookView from "./views/list_book.view";
 
-let vent: Backbone.Events = _.extend({}, Backbone.Events);
+
+const vent: Backbone.Events = _.extend({}, Backbone.Events);
 
 const DEBUG: boolean = true;
-const makeBook = (a,t)=> new BookModel({ author: a, title: t})
-const bookCollection = new BookCollection([
-    makeBook("Shakespere", "Hamlet"),
-    makeBook("J.D Salinger", "The Catcher in the Rye"),
-    makeBook("Euclid", "Elements"),
-    makeBook("Bertrand Russel", "Principa Mathematica"),
-])
 
 class AppView extends Backbone.View<Backbone.Model> {
     constructor(options: Backbone.ViewOptions) {
@@ -25,7 +19,9 @@ class AppView extends Backbone.View<Backbone.Model> {
     }
     showMyBooks() {
         const createBookView = new CreateBookView();
-        const listBookView = new ListBookView({ collection: bookCollection });
+        const listBookView = new ListBookView({
+            collection: new BookCollection()
+        });
         this.$el.html();
         this.$el.append(createBookView.render().el);
         this.$el.append(listBookView.render().el);
