@@ -4,7 +4,9 @@ interface IBookModel {
     title: string;
     author: string;
 }
-
+/**
+ * Backbone book model
+ */
 export class BookModel extends Backbone.Model implements IBookModel {
     get title(): string {
         return this.get("title");
@@ -29,7 +31,12 @@ export class BookModel extends Backbone.Model implements IBookModel {
     }
 }
 
-
+/**
+ * Backbone book collection
+ */
 export class BookCollection extends Backbone.Collection<BookModel> {
     public model = BookModel
+
+    // url endpoint for book collection CRUD operations
+    public url = "/api/v1/book"
 }

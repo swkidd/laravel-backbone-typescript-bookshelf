@@ -18,7 +18,8 @@ use App\Http\Controllers\API\BookController;
 Route::group(
     [
         'prefix' => 'v1',
-        'middleware' => ['auth:api']
+        // uses session based auth for both api and web routes
+        'middleware' => ['auth']
     ],
     function () {
         Route::get('/user', function (Request $request) {

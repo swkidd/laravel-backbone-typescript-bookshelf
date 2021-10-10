@@ -38,9 +38,11 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            // use web session based auth for api routes
+            'web',
             'throttle:60,1',
             'bindings',
-        ],
+         ],
     ];
 
     /**
