@@ -15,7 +15,7 @@ class RegisterTest extends TestCase
      */
     public function it_shows_the_register_view()
     {
-        $response = $this->get('register');
+        $response = $this->get('/auth/register');
 
         $response->assertStatus(200);
     }
@@ -30,7 +30,7 @@ class RegisterTest extends TestCase
     {
         $user = factory(User::class)->make();
 
-        $response = $this->post('register', [
+        $response = $this->post('/auth/register', [
             'name' => $user->name,
             'email' => $user->email,
             'password' => 'password',
@@ -52,7 +52,7 @@ class RegisterTest extends TestCase
     {
         $user = factory(User::class)->make();
 
-        $response = $this->post('register', [
+        $response = $this->post('/auth/register', [
             'name' => $user->name,
             'email' => $user->email,
             'password' => 'password',

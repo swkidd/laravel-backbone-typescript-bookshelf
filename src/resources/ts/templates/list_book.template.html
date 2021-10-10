@@ -1,0 +1,36 @@
+<div class="py-5 p-sm-5 d-block">
+    <table class="table table-sm table-hover table-bordered table-responsive-md">
+        <thead>
+            <tr>
+                <th scope="col" class="text-muted">Author</th>
+                <th scope="col" class="text-muted">Title</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% _.each(collection.models, function(book) { %>
+            <tr>
+                <td><%- book.author %></th>
+                <td><%- book.title %></th>
+                <td>
+                    <a
+                        id="delete-<%= book.get('id') %>"
+                        href="#"
+                    >
+                        Delete
+                    </a>
+                </td>
+                <td>
+                    <a
+                        id="edit-<%= book.get('id') %>"
+                        href="#"
+                    >
+                        Edit
+                    </a>
+                </td>
+            </tr>
+            <% });%>
+        </tbody>
+    </table>
+</div>

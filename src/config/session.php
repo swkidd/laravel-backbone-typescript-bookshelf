@@ -194,6 +194,7 @@ return [
     |
     */
 
-    'same_site' => null,
+    // disallow cross-site cookies
+    'same_site' => "strict",
 
 ];

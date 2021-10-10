@@ -15,7 +15,7 @@ class LoginTest extends TestCase
      */
     public function it_shows_the_login_view()
     {
-        $response = $this->get('login');
+        $response = $this->get('/auth/login');
 
         $response->assertStatus(200);
     }
@@ -28,7 +28,7 @@ class LoginTest extends TestCase
      */
     public function it_redirects_unauthenticated_users_to_login_screen()
     {
-        $response = $this->get('/')->assertRedirect('/login');
+        $response = $this->get('/')->assertRedirect('/auth/login');
     }
 
     /**
@@ -42,7 +42,7 @@ class LoginTest extends TestCase
         $user = factory(User::class)->create();
 
         $response = $this->followingRedirects()
-            ->post('/login', [
+            ->post('/auth/login', [
                 'email' => $user->email,
                 'password' => 'password',
             ]);
@@ -61,7 +61,7 @@ class LoginTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->post('/login', [
+        $response = $this->post('/auth/login', [
             'email' => $user->email,
             'password' => 'invalid'
         ]);
@@ -81,7 +81,7 @@ class LoginTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->post('/logout');
+        $response = $this->actingAs($user)->post('/auth/logout');
 
         $response = $response->assertRedirect('/');
 

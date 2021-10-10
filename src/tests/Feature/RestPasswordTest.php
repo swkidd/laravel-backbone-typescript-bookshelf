@@ -18,14 +18,14 @@ class RestPasswordTest extends TestCase
      */
     public function it_shows_the_reset_password_view()
     {
-        $response = $this->get('password/reset');
+        $response = $this->get('/auth/password/reset');
 
         $response->assertStatus(200);
     }
 
     /**
      * @test
-     * Sends password reset email to valid users. 
+     * Sends password reset email to valid users.
      *
      * @return void
      */
@@ -35,7 +35,7 @@ class RestPasswordTest extends TestCase
 
         $this->expectsNotification($user, ResetPassword::class);
 
-        $response = $this->post('password/email', ['email' => $user->email]);
+        $response = $this->post('/auth/password/email', ['email' => $user->email]);
 
         $response->assertRedirect('/');
     }
@@ -61,7 +61,7 @@ class RestPasswordTest extends TestCase
      */
     public function it_displays_form_to_reset_password()
     {
-        $response = $this->get('/password/reset/token');
+        $response = $this->get('/auth/password/reset/token');
 
         $response->assertStatus(200);
     }
@@ -78,7 +78,7 @@ class RestPasswordTest extends TestCase
 
         $token = Password::createToken($user);
 
-        $response = $this->post('/password/reset', [
+        $response = $this->post('/auth/password/reset', [
             'token' => $token,
             'email' => $user->email,
             'password' => 'password',

@@ -13,11 +13,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/manifest.js') }}"></script>
     <script src="{{ asset('js/vendor.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <script src="{{ asset('js/plugins.js') }}"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
@@ -30,7 +26,6 @@
         <nav class="d-flex flex-column flex-shrink-0 bg-dark" style="width: 3.5em;">
             <ul class="nav nav-pills text-center">
                 @guest
-                @if (Route::has('register'))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}" data-toggle="tooltip" data-placement="right" title="Login">
                         <i class="fas fa-sign-in-alt"></i>
@@ -41,7 +36,6 @@
                         <i class="fas fa-user-plus"></i>
                     </a>
                 </li>
-                @endif
                 @else
                 <li class="nav-item dropdown">
                 <li class="nav-item">
@@ -54,7 +48,7 @@
                 </li>
                 </li>
                 @endguest
-                <!-- Initialize all tooltips -->'
+                <!-- Initialize all navbar tooltips -->'
                 <script type="text/javascript">
                     $('[data-toggle="tooltip"]').tooltip({
                         container: 'nav'
