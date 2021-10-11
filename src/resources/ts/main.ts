@@ -1,10 +1,8 @@
 import * as Backbone from "backbone";
 import * as _ from "lodash";
 import { parseQuery } from "./utlis";
-import { BookCollection, BookModel } from "./models/book.model";
 
-import CreateBookView from "./views/create_book.view";
-import ListBookView from "./views/list_book.view";
+import TableBookView from "./views/table_book.view";
 
 class AppView extends Backbone.View<Backbone.Model> {
     constructor(options: Backbone.ViewOptions) {
@@ -14,13 +12,7 @@ class AppView extends Backbone.View<Backbone.Model> {
         Backbone.Events.on("show:myBooks", this.showMyBooks, this);
     }
     showMyBooks(query) {
-        const createBookView = new CreateBookView();
-        const listBookView = new ListBookView({
-            collection: new BookCollection()
-        });
-        this.$el.html();
-        this.$el.append(createBookView.render().el);
-        this.$el.append(listBookView.renderPage(query).el);
+        this.$el.html(new TableBookView().renderPage(query).el);
     }
 }
 

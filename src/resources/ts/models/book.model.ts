@@ -8,6 +8,8 @@ interface IBookModel {
  * Backbone book model
  */
 export class BookModel extends Backbone.Model implements IBookModel {
+    // url endpoint for book CRUD operations
+    public urlRoot = "/api/v1/book";
     get title(): string {
         return this.get("title");
     }
@@ -25,7 +27,7 @@ export class BookModel extends Backbone.Model implements IBookModel {
         super();
         for (var key in input) {
             if (key) {
-                this[key] = input[key];
+                this.attributes[key] = input[key];
             }
         }
     }
@@ -35,8 +37,9 @@ export class BookModel extends Backbone.Model implements IBookModel {
  * Backbone book collection
  */
 export class BookCollection extends Backbone.Collection<BookModel> {
-    public model = BookModel
+    public model = BookModel;
 
     // url endpoint for book collection CRUD operations
-    public url = "/api/v1/book"
+    public url = "/api/v1/book";
+    public urlRoot = "/api/v1/book";
 }
