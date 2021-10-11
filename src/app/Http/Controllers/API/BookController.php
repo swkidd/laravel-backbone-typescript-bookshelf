@@ -17,9 +17,23 @@ class BookController extends Controller
      *
      * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        $books = Book::orderBy('id')->get();
+        // order by author, title, or id
+        // passed as url parameter
+        $orderBy = $request->query('orderBy', 'id');
+        if (!in_array($orderBy, array('author', 'title', 'id'))) {
+            $orderBy = 'id';
+        }
+
+        // ascending or decending order
+        // passed as url parameter
+        $order = $request->query('order', 'DESC');
+        if (!in_array($order, array('DESC', 'ASC'))) {
+            $order = 'DESC';
+        }
+
+        $books = Book::orderBy($orderBy, $order)->paginate(5);
         $collection = new BookCollection($books);
 
         return response()->json($collection, 200);

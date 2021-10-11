@@ -2,35 +2,67 @@
     <table class="table table-sm table-hover table-bordered table-responsive-md">
         <thead>
             <tr>
-                <th scope="col" class="text-muted">Author</th>
-                <th scope="col" class="text-muted">Title</th>
+                <th scope="col">
+                    Author
+                    <span style="cursor: pointer;"
+                        onclick="<%= `Backbone.Events.trigger('showPage:book_list', { page: ${query.page}, orderBy: 'author', order: 'ASC' })` %>">
+                        &#x25B2;
+                    </span>
+                    <span style="cursor: pointer;"
+                        onclick="<%= `Backbone.Events.trigger('showPage:book_list', { page: ${query.page}, orderBy: 'author', order: 'DESC' })` %>">
+                        &#x25BC;
+                    </span>
+                </th>
+                <th scope="col">
+                    Title
+                    <span style="cursor: pointer;"
+                        onclick="<%= `Backbone.Events.trigger('showPage:book_list', { page: ${query.page}, orderBy: 'title', order: 'ASC' })` %>">
+                        &#x25B2;
+                    </span>
+                    <span style="cursor: pointer;"
+                        onclick="<%= `Backbone.Events.trigger('showPage:book_list', { page: ${query.page}, orderBy: 'title', order: 'DESC' })` %>">
+                        &#x25BC;
+                    </span>
+                </th>
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            <% _.each(collection.models, function(book) { %>
-            <tr>
-                <td><%- book.author %></th>
-                <td><%- book.title %></th>
-                <td>
-                    <a
-                        id="delete-<%= book.get('id') %>"
-                        href="#"
-                    >
-                        Delete
-                    </a>
-                </td>
-                <td>
-                    <a
-                        id="edit-<%= book.get('id') %>"
-                        href="#"
-                    >
-                        Edit
-                    </a>
-                </td>
-            </tr>
-            <% });%>
+            <% _.each(collection, function(book) { %>
+                <tr>
+                    <td>
+                        <%- book.author %>
+                    </td>
+                    <td>
+                        <%- book.title %>
+                    </td>
+                    <td>
+                        <a id="delete-<%= book.id %>" href="#">
+                            Delete
+                        </a>
+                    </td>
+                    <td>
+                        <a id="edit-<%= book.id %>" href="#">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+                <% });%>
         </tbody>
     </table>
+    <% if (query.page) { %>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <button class="page-link"
+                    onclick="<%= `Backbone.Events.trigger('showPage:book_list', { page: ${Math.max(1, query.page - 1)} })` %>">
+                    Previous
+                </button>
+                <button class="page-link"
+                    onclick="<%= `Backbone.Events.trigger('showPage:book_list', { page: ${query.page + 1} })` %>">
+                    Next
+                </button>
+            </ul>
+        </nav>
+        <% } %>
 </div>

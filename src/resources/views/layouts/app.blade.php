@@ -50,9 +50,7 @@
                 @endguest
                 <!-- Initialize all navbar tooltips -->'
                 <script type="text/javascript">
-                    $('[data-toggle="tooltip"]').tooltip({
-                        container: 'nav'
-                    });
+                    $('[data-toggle="tooltip"]').tooltip();
                 </script>
             </ul>
         </nav>
