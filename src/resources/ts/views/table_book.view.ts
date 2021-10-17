@@ -16,16 +16,30 @@ export default class TableBookView extends Backbone.View<Backbone.Model>
     events() {
         return {
             "click button.prev-page": "prevPage",
-            "click button.next-page": "nextPage"
+            "click button.next-page": "nextPage",
+            "click span.order-author-desc": () =>
+                this.orderPage("author", "DESC"),
+            "click span.order-author-asc": () =>
+                this.orderPage("author", "ASC"),
+            "click span.order-title-desc": () =>
+                this.orderPage("title", "DESC"),
+            "click span.order-title-asc": () => this.orderPage("title", "ASC")
         };
     }
 
+    orderPage(field, direction) {
+        const params = new URLSearchParams();
+        params.set("orderBy", field);
+        params.set("order", direction);
+        this.listBookView.renderParams(params);
+    }
+
     prevPage() {
-        this.listBookView.prevPage()
+        this.listBookView.prevPage();
     }
 
     nextPage() {
-        this.listBookView.nextPage()
+        this.listBookView.nextPage();
     }
 
     render() {
@@ -36,7 +50,7 @@ export default class TableBookView extends Backbone.View<Backbone.Model>
     renderPage(query) {
         const params = new URLSearchParams(query);
 
-        this.listBookView.renderParams(params)
+        this.listBookView.renderParams(params);
         this.render();
 
         return this;
