@@ -8,6 +8,15 @@ export function addCSRFHeader(xhr) {
     }
 }
 
+// return query param string from url
+export function parseURLQueryParams(url) {
+    const queryIndex = url.indexOf('?')
+    if (queryIndex > -1) {
+        return url.substring(queryIndex)
+    }
+    return ''
+}
+
 // parse url query params into json (x=4 => ({ x: 4 }))
 export function parseQuery(queryString) {
     const query = {};

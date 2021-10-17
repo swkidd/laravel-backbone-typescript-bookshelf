@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API;
 
 use App\Book;
-use App\Http\Resources\BookCollection;
 use App\Http\Resources\BookResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -12,35 +11,24 @@ use App\Http\Controllers\Controller;
 
 class BookController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
+     * Display a listing of books.
      *
      * @return JsonResponse
      */
     public function index(Request $request)
     {
-        // order by author, title, or id
-        // passed as url parameter
-        $orderBy = $request->query('orderBy', 'id');
-        if (!in_array($orderBy, array('author', 'title', 'id'))) {
-            $orderBy = 'id';
-        }
+        $books = Book::latest()
+            ->orderBooks(request(['orderBy', 'order']))
+            ->search(request(['search', 'searchBy']))
+            ->paginate(5);
 
-        // ascending or decending order
-        // passed as url parameter
-        $order = $request->query('order', 'DESC');
-        if (!in_array($order, array('DESC', 'ASC'))) {
-            $order = 'DESC';
-        }
-
-        $books = Book::orderBy($orderBy, $order)->paginate(5);
-        $collection = new BookCollection($books);
-
-        return response()->json($collection, 200);
+        return response()->json($books, 200);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created book in storage.
      *
      * @param Request $request
      * @return JsonResponse
@@ -64,7 +52,7 @@ class BookController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified book.
      *
      * @param Book $book
      * @return JsonResponse
@@ -76,7 +64,7 @@ class BookController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified book in storage.
      *
      * @param Request $request
      * @param Book $book
@@ -102,7 +90,7 @@ class BookController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified book from storage.
      *
      * @param Book $book
      * @return JsonResponse

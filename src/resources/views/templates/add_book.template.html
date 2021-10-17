@@ -1,0 +1,38 @@
+<div class="py-5 mx-auto" style="max-width: 320px;">
+    <div id="book-added-alert" class="alert alert-info alert-secondary fade d-none" role="alert">
+        <button id="alert-close-button" type="button" class="close m-0 p-0" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Book Added!</strong> Your book was added to your library. <a href="/">Click Here</a> to check it
+        out.
+        <script type="text/javascript">
+            $('#book-added-alert button').on('click', () => $('#book-added-alert').addClass('d-none'))
+        </script>
+    </div>
+    <h5 class="text-muted">Add a book</h5>
+    <div class="form-group">
+        <div class="col-sm-1-12">
+            <input type="text" id="book-title" placeholder="Book Title" class="form-control" required="required" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-1-12">
+            <input type="text" id="book-author" class="form-control" placeholder="Book Author" required="required" />
+        </div>
+    </div>
+    <div class="col-sm-1-12 justify-content-right">
+        <button id="add" class="add-book-button btn btn-primary" type="submit" onClick="">
+            Add
+        </button>
+    </div>
+    <script type="text/javascript">
+        $("#book-title, #book-author").keypress(function (e) {
+            var key = e.which;
+            if (key == 13) {
+                console.log('hey')
+                $("#add").click();
+                return false;
+            }
+        });
+    </script>
+</div>

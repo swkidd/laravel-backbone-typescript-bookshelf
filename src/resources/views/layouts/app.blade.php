@@ -37,7 +37,16 @@
                     </a>
                 </li>
                 @else
-                <li class="nav-item dropdown">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('home') }}" data-toggle="tooltip" data-placement="right" title="My Books">
+                        <i class="fas fa-book"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('home') }}/new" data-toggle="tooltip" data-placement="right" title="Add a Book">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" onclick="$('#logout-form').submit()" data-toggle="tooltip" data-placement="right" title="Logout">
                         <i class="fas fa-sign-out-alt"></i>
@@ -46,11 +55,10 @@
                         @csrf
                     </form>
                 </li>
-                </li>
                 @endguest
                 <!-- Initialize all navbar tooltips -->'
                 <script type="text/javascript">
-                    $('[data-toggle="tooltip"]').tooltip();
+                    $('nav [data-toggle="tooltip"]').tooltip();
                 </script>
             </ul>
         </nav>
@@ -60,7 +68,7 @@
                     {{ config('app.name') }}
                 </a>
             </div>
-            <main class="py-4">
+            <main>
                 @yield('content')
             </main>
         </div>

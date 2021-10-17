@@ -1,28 +1,8 @@
 <td>
     <input id="edit-author-input-<%= book.get('id') %>" type="text" value="<%= book.author %>" />
-    <script type="text/javascript">
-        $("#edit-author-input-<%= book.get('id') %>").keypress(function (e) {
-            var key = e.which;
-            if (key == 13)
-            {
-                $("#save-<%= book.get('id') %>").click();
-                return false;
-            }
-        });
-    </script>
 </td>
 <td>
     <input id="edit-title-input-<%= book.get('id') %>" type="text" value="<%= book.title %>" />
-    <script type="text/javascript">
-        $("#edit-title-input-<%= book.get('id') %>").keypress(function (e) {
-            var key = e.which;
-            if (key == 13)
-            {
-                $("#save-<%= book.get('id') %>").click();
-                return false;
-            }
-        });
-    </script>
 </td>
 <td class="text-center">
     <button id="save-<%= book.get('id') %>" class="edit-save btn btn-sm text-primary">
@@ -34,3 +14,12 @@
         Cancel
     </button>
 </td>
+<script type="text/javascript">
+    $("#edit-author-input-<%= book.get('id') %>, #edit-title-input-<%= book.get('id') %>").keypress(function (e) {
+        var key = e.which;
+        if (key == 13) {
+            $("#save-<%= book.get('id') %>").click();
+            return false;
+        }
+    });
+</script>

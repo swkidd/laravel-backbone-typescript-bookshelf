@@ -6,49 +6,42 @@ import BookView from "./book.view";
 
 interface IListBookView {
     bookCollection: BookCollection;
-    currentPageNumber: number;
 }
 
-export default class ListBookView extends Backbone.View implements IListBookView {
-    public bookCollection = new BookCollection();
-    public currentPageNumber = 1;
+export default class ListBookView extends Backbone.View
+    implements IListBookView {
+    public bookCollection;
 
     initialize() {
-        this.render();
+        this.bookCollection = new BookCollection();
     }
 
-    nextPage() {
-        this.currentPageNumber += 1
-        this.renderParams()
-    }
-
-    prevPage() {
-        if (this.currentPageNumber === 1) return
-        this.currentPageNumber -= 1
-        this.renderParams()
+    goToPage(page) {
+        this.bookCollection.goToPage(page).then(shouldRender => {
+            if (shouldRender) {
+                this.render();
+            }
+        });
     }
 
     addOne(book) {
         // on destroy repopulate list
-        book.on('destroy', () => this.renderParams.call(this))
+        book.on("destroy", () => this.renderParams());
+
         const bookView = new BookView({ model: book });
         this.$el.append(bookView.render().el);
     }
 
-    renderParams(params = new URLSearchParams()) {
-        const pageNumber = parseInt(params.get("page") || "");
-        if (!!pageNumber) {
-            this.currentPageNumber = pageNumber;
-        }
-        params.set('page', this.currentPageNumber.toString())
-
-        // add CSRF header to requests
-        this.bookCollection.fetch(params).then(() => {
-            this.$el.empty()
-            this.setElement($('#table-book-list'))
-            this.bookCollection.each(this.addOne, this);
-        });
-
+    render() {
+        this.$el.empty();
+        this.setElement($("#table-book-list"));
+        this.bookCollection.each(this.addOne, this);
         return this;
+    }
+
+    renderParams(params?) {
+        return this.bookCollection.fetch(params).then(() => {
+            this.render();
+        });
     }
 }

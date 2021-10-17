@@ -1,12 +1,12 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "es2020",
-    "moduleResolution": "node",
-    "baseUrl": "./",
-    "strict": true,
-    "skipLibCheck": true,
-    "noImplicitAny": false
-  },
-  "include": ["resources/ts/**/*", "resources/views/templates"],
+    "compilerOptions": {
+        "target": "es6",
+        "module": "es2020",
+        "moduleResolution": "node",
+        "baseUrl": "./",
+        "strict": true,
+        "skipLibCheck": true,
+        "noImplicitAny": false,
+    },
+    "include": ["resources/ts/**/*", "resources/views/templates"]
 }

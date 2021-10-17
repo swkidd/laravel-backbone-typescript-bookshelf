@@ -15,31 +15,37 @@ export default class TableBookView extends Backbone.View<Backbone.Model>
 
     events() {
         return {
-            "click button.prev-page": "prevPage",
-            "click button.next-page": "nextPage",
+            "click button.first-page": () =>
+                this.listBookView.goToPage("first"),
+            "click button.prev-page": () => this.listBookView.goToPage("prev"),
+            "click button.next-page": () => this.listBookView.goToPage("next"),
+            "click button.last-page": () => this.listBookView.goToPage("last"),
             "click span.order-author-desc": () =>
                 this.orderPage("author", "DESC"),
             "click span.order-author-asc": () =>
                 this.orderPage("author", "ASC"),
             "click span.order-title-desc": () =>
                 this.orderPage("title", "DESC"),
-            "click span.order-title-asc": () => this.orderPage("title", "ASC")
+            "click span.order-title-asc": () => this.orderPage("title", "ASC"),
+            "click button.search-button": "search",
+            "click button.clear-search-button": "clearSearch"
         };
     }
 
-    orderPage(field, direction) {
-        const params = new URLSearchParams();
-        params.set("orderBy", field);
-        params.set("order", direction);
-        this.listBookView.renderParams(params);
+    search() {
+        const search = $("#search-bar").val() as string;
+        const searchBy = $("#search-filter-select").val() as string;
+        this.listBookView.renderParams({ search, searchBy, page: 1 });
     }
 
-    prevPage() {
-        this.listBookView.prevPage();
+    clearSearch() {
+        $("#search-bar").val("");
+        $("#search-filter-select").val("");
+        this.listBookView.renderParams();
     }
 
-    nextPage() {
-        this.listBookView.nextPage();
+    orderPage(orderBy, order) {
+        this.listBookView.renderParams({ orderBy, order });
     }
 
     render() {
@@ -48,11 +54,8 @@ export default class TableBookView extends Backbone.View<Backbone.Model>
     }
 
     renderPage(query) {
-        const params = new URLSearchParams(query);
-
-        this.listBookView.renderParams(params);
+        this.listBookView.renderParams(query);
         this.render();
-
         return this;
     }
 }

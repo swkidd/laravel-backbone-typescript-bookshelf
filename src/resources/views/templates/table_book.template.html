@@ -1,5 +1,39 @@
-<div class="py-5 p-sm-5 d-block">
-    <table class="table table-sm table-hover table-bordered table-responsive-md">
+<div class="py-sm-2 px-sm-5 d-block">
+    <div class="container my-2">
+        <div class="row">
+            <div id="search-group" class="input-group">
+                <input id="search-bar" type="text" class="form-control w-sm-auto" placeholder="Search...">
+                <select id="search-filter-select" class="form-control" style="max-width: 200px;">
+                    <option value="">Filter By:</option>
+                    <option value="author">Author</option>
+                    <option value="title">Title</option>
+                    <option value="both">Title and Author</option>
+                </select>
+                <span class="input-group-btn ml-1" data-toggle="tooltip" data-placement="bottom" title="Search">
+                    <button id="search-button" class="search-button btn btn-outline-secondary" type="button"><i
+                            class="fas fa-search"></i></button>
+                </span>
+                <span class="input-group-btn ml-1" data-toggle="tooltip" data-placement="bottom" title="Clear Search">
+                    <button class="clear-search-button btn btn-outline-secondary" type="button"><i
+                            class="fas fa-times"></i></button>
+                </span>
+                <script type="text/javascript">
+                    $('#search-group [data-toggle="tooltip"]').tooltip();
+                    $("#search-bar").keypress(function (e) {
+                        var key = e.which;
+                        if (key == 13) {
+                            $("#search-button").click();
+                            return false;
+                        }
+                    });
+                    $("#search-filter-select").on('change', function (e) {
+                        $("#search-button").click();
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+    <table class="table table-sm table-hover table-bordered table-responsive-sm">
         <thead>
             <tr>
                 <th scope="col">
@@ -28,11 +62,17 @@
     </table>
     <nav aria-label="Page navigation example">
         <ul class="pagination">
-            <button class="prev-page btn btn-sm">
+            <button class="first-page btn btn-sm text-primary">
+                First
+            </button>
+            <button class="prev-page btn btn-sm text-primary">
                 Previous
             </button>
-            <button class="next-page btn btn-sm">
+            <button class="next-page btn btn-sm text-primary">
                 Next
+            </button>
+            <button class="last-page btn btn-sm text-primary">
+                Last
             </button>
         </ul>
     </nav>
