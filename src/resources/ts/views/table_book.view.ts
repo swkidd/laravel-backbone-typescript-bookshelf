@@ -2,13 +2,14 @@ import * as Backbone from "backbone";
 import * as _ from "lodash";
 
 import ListBookView from "./list_book.view";
-import template from "../templates/table_book.template.html";
+import template from "../../views/templates/table_book.template.html";
 
 interface ITableBookView {
     listBookView: Backbone.View;
 }
 
-export default class TableBookView extends Backbone.View<Backbone.Model> implements ITableBookView {
+export default class TableBookView extends Backbone.View<Backbone.Model>
+    implements ITableBookView {
     private static tpl = _.template(template);
     public listBookView = new ListBookView();
 
@@ -19,15 +20,25 @@ export default class TableBookView extends Backbone.View<Backbone.Model> impleme
         };
     }
 
-    prevPage() {}
+    prevPage() {
+        this.listBookView.prevPage()
+    }
 
-    nextPage() {}
+    nextPage() {
+        this.listBookView.nextPage()
+    }
+
+    render() {
+        this.$el.append(TableBookView.tpl());
+        return this;
+    }
 
     renderPage(query) {
-        const queryString = new URLSearchParams(query).toString();
-        this.$el.append(TableBookView.tpl());
-        this.$el.find("#table-book-list").html(this.listBookView.el);
-        Backbone.history.navigate(`/${queryString}`);
+        const params = new URLSearchParams(query);
+
+        this.listBookView.renderParams(params)
+        this.render();
+
         return this;
     }
 }

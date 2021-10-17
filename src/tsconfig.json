@@ -8,5 +8,5 @@
     "skipLibCheck": true,
     "noImplicitAny": false
   },
-  "include": ["resources/ts/**/*"],
+  "include": ["resources/ts/**/*", "resources/views/templates"],
 }

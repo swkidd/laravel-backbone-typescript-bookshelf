@@ -1,4 +1,5 @@
 import * as Backbone from "backbone";
+import { addCSRFHeader } from "../utlis";
 
 interface IBookModel {
     title: string;
@@ -10,6 +11,7 @@ interface IBookModel {
 export class BookModel extends Backbone.Model implements IBookModel {
     // url endpoint for book CRUD operations
     public urlRoot = "/api/v1/book";
+
     get title(): string {
         return this.get("title");
     }
@@ -21,6 +23,11 @@ export class BookModel extends Backbone.Model implements IBookModel {
     }
     set author(author: string) {
         this.set("author", author);
+    }
+
+    sync(method, model, options) {
+        options = { beforeSend: addCSRFHeader, ...options}
+        return super.sync(method, model, options)
     }
 
     constructor(input: IBookModel) {
@@ -36,10 +43,24 @@ export class BookModel extends Backbone.Model implements IBookModel {
 /**
  * Backbone book collection
  */
-export class BookCollection extends Backbone.Collection<BookModel> {
+export class BookCollection extends Backbone.Collection<Backbone.Model> {
     public model = BookModel;
 
     // url endpoint for book collection CRUD operations
     public url = "/api/v1/book";
-    public urlRoot = "/api/v1/book";
+
+    fetch(params) {
+        const url = `${this.url}?${params.toString()}`
+
+        // change browswer url without triggering a Backbone update
+        Backbone.history.navigate(`?${params.toString()}`);
+
+        const options = { url }
+        return super.fetch(options)
+    }
+
+    sync(method, collection, options) {
+        options = { beforeSend: addCSRFHeader, ...options}
+        return super.sync(method, collection, options)
+    }
 }
