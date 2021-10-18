@@ -35,6 +35,6 @@ RUN pecl install xdebug-2.9.2 \
 
 COPY --from=composer $LARAVEL_PATH $LARAVEL_PATH
 
-RUN chown -R www-data $LARAVEL_PATH/storage
+RUN chown -R www-data storage
 
 WORKDIR $LARAVEL_PATH
