@@ -25,6 +25,7 @@ Route::group(
         Route::get('/user', function (Request $request) {
             return $request->user();
         });
+        Route::get('/book/export', 'API\BookController@export')->name('book.export');
         Route::apiResource('/book', 'API\BookController');
     }
 );

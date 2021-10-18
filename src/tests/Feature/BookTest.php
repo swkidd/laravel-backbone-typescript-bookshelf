@@ -23,9 +23,10 @@ class BookTest extends TestCase
         $response = $this->actingAs($user, 'api')->get('/api/v1/book');
         $response->assertSuccessful();
         $json = $response->decodeResponseJson();
-        $this->assertContains($book1->toArray(), $json);
-        $this->assertContains($book2->toArray(), $json);
-        $this->assertContains($book3->toArray(), $json);
+        $data = $json['data'];
+        $this->assertContains($book1->toArray(), $data);
+        $this->assertContains($book2->toArray(), $data);
+        $this->assertContains($book3->toArray(), $data);
     }
 
     /**
@@ -74,7 +75,7 @@ class BookTest extends TestCase
         $this->assertEquals($json['author'], $newAuthor);
         $this->assertEquals($json['title'], $newTitle);
     }
-    
+
     /**
      * @test
      * Valid users can delete books
@@ -89,5 +90,4 @@ class BookTest extends TestCase
         $response->assertSuccessful();
         $this->assertDatabaseMissing('books', ['id' => $book->id]);
     }
-
 }

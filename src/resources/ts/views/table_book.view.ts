@@ -1,5 +1,4 @@
 import * as Backbone from "backbone";
-import * as _ from "lodash";
 
 import ListBookView from "./list_book.view";
 import template from "../../views/templates/table_book.template.html";
@@ -10,7 +9,7 @@ interface ITableBookView {
 
 export default class TableBookView extends Backbone.View<Backbone.Model>
     implements ITableBookView {
-    private static tpl = _.template(template);
+    private static tpl: string = template;
     public listBookView = new ListBookView();
 
     events() {
@@ -49,13 +48,31 @@ export default class TableBookView extends Backbone.View<Backbone.Model>
     }
 
     render() {
-        this.$el.append(TableBookView.tpl());
+        this.$el.append(TableBookView.tpl);
         return this;
     }
 
     renderPage(query) {
         this.listBookView.renderParams(query);
         this.render();
+        this.setSearchBar(query);
+        this.setFilterSelect(query);
         return this;
+    }
+
+    setSearchBar(query) {
+        if ('search' in query) {
+            setTimeout(() => {
+                $("#search-bar").val(query['search'])
+            }, 100)
+        }
+    }
+
+    setFilterSelect(query) {
+        if ('searchBy' in query) {
+            setTimeout(() => {
+                $("#search-filter-select").val(query['searchBy'])
+            }, 100)
+        }
     }
 }

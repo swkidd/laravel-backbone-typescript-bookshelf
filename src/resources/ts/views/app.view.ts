@@ -2,8 +2,17 @@ import * as Backbone from "backbone";
 
 import TableBookView from "./table_book.view";
 import AddBookView from "./add_book.view";
+import ExportModalView from "./export_modal.view";
 
-export default class AppView extends Backbone.View<Backbone.Model> {
+interface IAppView {
+    exportModal: Backbone.View;
+}
+
+export default class AppView extends Backbone.View<Backbone.Model>
+    implements IAppView {
+
+    public exportModal = new ExportModalView();
+
     constructor(options: Backbone.ViewOptions) {
         super(options);
     }

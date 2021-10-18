@@ -26,35 +26,46 @@
         <nav class="d-flex flex-column flex-shrink-0 bg-dark" style="width: 3.5em;">
             <ul class="nav nav-pills text-center">
                 @guest
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}" data-toggle="tooltip" data-placement="right" title="Login">
-                        <i class="fas fa-sign-in-alt"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}" data-toggle="tooltip" data-placement="right" title="Register">
-                        <i class="fas fa-user-plus"></i>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}" data-toggle="tooltip" data-placement="right"
+                            title="Login">
+                            <i class="fas fa-sign-in-alt"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}" data-toggle="tooltip"
+                            data-placement="right" title="Register">
+                            <i class="fas fa-user-plus"></i>
+                        </a>
+                    </li>
                 @else
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}" data-toggle="tooltip" data-placement="right" title="My Books">
-                        <i class="fas fa-book"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}/new" data-toggle="tooltip" data-placement="right" title="Add a Book">
-                        <i class="fas fa-plus"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="$('#logout-form').submit()" data-toggle="tooltip" data-placement="right" title="Logout">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('home') }}" data-toggle="tooltip" data-placement="right"
+                            title="My Books">
+                            <i class="fas fa-book"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('home') }}/new" data-toggle="tooltip"
+                            data-placement="right" title="Add a Book">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="modal" data-target="#export-modal">
+                        <a class="nav-link" href="javascript:void(0)" data-toggle="tooltip" data-placement="right"
+                            title="Export Books">
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item position-absolute" style="height: 35px; bottom: 10px;">
+                        <a class="nav-link" href="#" onclick="$('#logout-form').submit()" data-toggle="tooltip"
+                            data-placement="right" title="Logout">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
                 @endguest
                 <!-- Initialize all navbar tooltips -->'
                 <script type="text/javascript">
@@ -62,6 +73,7 @@
                 </script>
             </ul>
         </nav>
+        <div id="export-modal-container"></div>
         <div class="col">
             <div class="text-center p-5">
                 <a class="h2" href="{{ route('home') }}">

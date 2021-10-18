@@ -1,0 +1,37 @@
+<div class="modal fade" id="export-modal" tabindex="-1" role="dialog" aria-labelledby="export-modal-title"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-muted" id="export-modal-title">Export some books</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <label for="export-column-select" class="text-muted">Which data?</label>
+                    <select id="export-column-select" name="export-column-select" class="form-control"
+                        style="max-width: 200px;">
+                        <option value="both">Title and Author</option>
+                        <option value="author">Author</option>
+                        <option value="title">Title</option>
+                    </select>
+                </div>
+                <div class="mt-4">
+                    <label for="export-filetype-select" class="text-muted">What file type?</label>
+                    <select id="export-filetype-select" name="export-filetype-select" class="form-control"
+                        style="max-width: 200px;">
+                        <option value="csv">CSV (Excel)</option>
+                        <option value="xml">XML</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="export-books-button btn btn-primary">Export</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            <a download href="" data-base-url="/api/v1/book/export" id="export-download-a" class="d-none"></a>
+        </div>
+    </div>
+</div>
